@@ -75,7 +75,7 @@ void Tiny::Window::SwapBuffers() {
 }
 
 bool Tiny::Window::Closed() {
-    glfwWindowShouldClose(s_window);
+    return glfwWindowShouldClose(s_window);
 }
 
 bool Tiny::Input::KeyDown(KeyCode key) {
