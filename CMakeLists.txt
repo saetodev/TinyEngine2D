@@ -7,7 +7,7 @@ file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 
 include_directories("include")
 
-add_executable(${PROJECT_NAME} ${SRC_FILES} "vendor/glad/src/glad.c")
+add_library(${PROJECT_NAME} STATIC ${SRC_FILES} "vendor/glad/src/glad.c")
 
 if(WIN32)
     target_include_directories(${PROJECT_NAME} PUBLIC "vendor/glfw/include" "vendor/glad/include" "vendor/glm")

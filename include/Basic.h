@@ -1,6 +1,7 @@
 #ifndef TINY_ENGINE_BASIC_H
 #define TINY_ENGINE_BASIC_H
 
+#include <array>
 #include <fstream>
 #include <iostream>
 #include <sstream>

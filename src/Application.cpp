@@ -1,61 +1,24 @@
 #include "Application.h"
 #include "Renderer2D.h"
+#include "Window.h"
 
-#include <iostream>
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-namespace Tiny {
-
-void Application::Run() {
+void Tiny::Application::Run() {
     Init();
 
-    while (!glfwWindowShouldClose(m_window)) {
+    while (!Window::Closed()) {
         OnUpdate();
-
-        glfwSwapBuffers(m_window);
-        glfwPollEvents();
+        Window::SwapBuffers();
     }
 
     Shutdown();
 }
 
-void Application::Init() {
-    if (!glfwInit()) {
-        const char* message = NULL;
-        glfwGetError(&message);
-
-        std::cout << "ERROR: " << message << std::endl;
-        std::exit(-1);
-    }
-
-    glfwWindowHint(GLFW_SCALE_TO_MONITOR, GLFW_TRUE);
-
-    m_window = glfwCreateWindow(m_settings.width, m_settings.height, m_settings.title.c_str(), NULL, NULL);
-
-    if (!m_window) {
-        const char* message = NULL;
-        glfwGetError(&message);
-
-        std::cout << "ERROR: " << message << std::endl;
-        std::exit(-1);
-    }
-
-    glfwMakeContextCurrent(m_window);
-
-    if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "ERROR: Failed to load OpenGL" << std::endl;
-        std::exit(-1);
-    }
-
+void Tiny::Application::Init() {
+    Window::Init(m_settings.width, m_settings.height, m_settings.title);
     Renderer2D::Init();
 }
 
-void Application::Shutdown() {
-    glfwDestroyWindow(m_window);
-    glfwTerminate();
-}
-
+void Tiny::Application::Shutdown() {
+    Window::Shutdown();
+    Renderer2D::Shutdown();
 }

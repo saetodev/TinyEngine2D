@@ -6,6 +6,7 @@
 
 namespace Tiny::Renderer2D {
     void Init();
+    void Shutdown();
     
     void Begin();
     void End();
